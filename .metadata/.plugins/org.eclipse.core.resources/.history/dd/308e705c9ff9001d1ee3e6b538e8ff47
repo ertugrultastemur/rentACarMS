@@ -1,0 +1,5 @@
+package com.example.carservice.dto.response;
+
+public class GetAllCarsResponse {
+
+}

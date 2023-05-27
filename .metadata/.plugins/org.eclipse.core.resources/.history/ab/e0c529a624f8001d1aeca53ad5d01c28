@@ -1,0 +1,53 @@
+package com.example.carservice.controller;
+
+import java.util.List;
+
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.carservice.dto.CarDto;
+import com.example.carservice.dto.CarIdDto;
+import com.example.carservice.model.Car;
+import com.example.carservice.service.CarService;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import lombok.Data;
+
+@Data
+@RestController
+@RequestMapping("/v1/car")
+@Validated
+public class CarController {
+
+	private final CarService carService;
+	
+	@GetMapping
+	public ResponseEntity<List<CarDto>> getAllCars(){
+		return ResponseEntity.ok(carService.getAllCars());
+	}
+	
+	@GetMapping("/state/{state}")
+	public ResponseEntity<CarIdDto> getCarByState(@PathVariable @NotNull String state){
+		return ResponseEntity.ok(carService.findByState(state));
+	}
+	
+	@GetMapping("/car/{id}")
+	public ResponseEntity<CarDto> getCarById(@PathVariable @NotNull int id){
+		return ResponseEntity.ok(carService.findCarById(id));
+	}
+	
+	@PostMapping
+	@ResponseStatus(code = httpstatus.created)
+	public void add(@RequestBody @Valid ResponseEntity<CarDto> car) {
+		this.carService.
+	}
+}
