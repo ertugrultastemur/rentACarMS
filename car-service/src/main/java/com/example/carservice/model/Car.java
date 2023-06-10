@@ -1,5 +1,7 @@
 package com.example.carservice.model;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.hibernate.validator.constraints.UniqueElements;
 
 import jakarta.persistence.Column;
@@ -39,5 +41,10 @@ public class Car {
 	
 	@Column(name="modelId")
 	private int modelId;
+	
+	@Column(name="isDeleted")
+	@SQLDelete(sql = "UPDATE Cars SET isDeleted = true WHERE id=?")
+	@Where(clause = "isDeleted=false")
+	private boolean isDeleted= Boolean.FALSE;
 
 }

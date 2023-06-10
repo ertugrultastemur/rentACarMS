@@ -55,9 +55,9 @@ public class CarController {
 		this.carService.add(carDto);
 	}
 	
-	@DeleteMapping(name="/delete{plate}")
-	public void delete(@PathVariable("plate") DeleteCarRequestDto carDto){
-		carService.delete(carDto.getPlate());
+	@DeleteMapping("/delete/{plate}")
+	public void delete(@PathVariable("plate") String plate){
+		carService.delete(plate);
 	}
 	 
 }
