@@ -17,6 +17,7 @@ import com.example.carservice.model.Car;
 import com.example.carservice.repository.CarRepository;
 import com.example.carservice.util.ModelMapperService;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -56,9 +57,13 @@ public class CarService {
 		this.repository.save(car);
 	}
 	
-	public void delete(String plate) {
-		//Car car = modelMapperService.forRequest().map(carDto, Car.class);
-		this.repository.deleteByPlate(plate);
+	@Transactional
+	public void delete(String carDto) {
+		repository.findByPlate(carDto)
+	            .orElseThrow(() -> new CarNotFoundException("Entity not found"));
+		Car car = modelMapperService.forRequest().map(carDto, Car.class);
+		car.setDeleted(true);
+		repository.save(car);
 	}
 
 }
