@@ -6,10 +6,12 @@ import java.util.stream.Collectors;
 
 import org.springframework.http.RequestEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.carservice.dto.CarDto;
 import com.example.carservice.dto.CarIdDto;
 import com.example.carservice.dto.request.CreateCarRequestDto;
+import com.example.carservice.dto.request.DeleteCarRequestDto;
 import com.example.carservice.exception.CarNotFoundException;
 import com.example.carservice.model.Car;
 import com.example.carservice.repository.CarRepository;
@@ -39,9 +41,9 @@ public class CarService {
 	}
 	
 	public CarIdDto findByPlate(String plate) {
-		return repository.findCarByState(plate)
+		return repository.findByPlate(plate)
 				.map(car -> new CarIdDto(car.getId(),car.getState()))
-				.orElseThrow(() -> new CarNotFoundException("Car could not found by state : " + plate));
+				.orElseThrow(() -> new CarNotFoundException("Car could not found by plate : " + plate));
 	}
 	
 	public CarDto findCarById(int id) {
@@ -52,6 +54,11 @@ public class CarService {
 	public void add(CreateCarRequestDto carDto) {
 		Car car = modelMapperService.forRequest().map(carDto, Car.class);
 		this.repository.save(car);
+	}
+	
+	public void delete(String plate) {
+		//Car car = modelMapperService.forRequest().map(carDto, Car.class);
+		this.repository.deleteByPlate(plate);
 	}
 
 }

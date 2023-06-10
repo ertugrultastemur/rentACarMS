@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.carservice.dto.CarDto;
 import com.example.carservice.dto.CarIdDto;
 import com.example.carservice.dto.request.CreateCarRequestDto;
+import com.example.carservice.dto.request.DeleteCarRequestDto;
 import com.example.carservice.model.Car;
 import com.example.carservice.service.CarService;
 
@@ -49,7 +51,13 @@ public class CarController {
 	
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public void add(@RequestBody @Valid CreateCarRequestDto car) {
-		this.carService.add(car);
+	public void add(@RequestBody @Valid CreateCarRequestDto carDto) {
+		this.carService.add(carDto);
 	}
+	
+	@DeleteMapping(name="/delete{plate}")
+	public void delete(@PathVariable("plate") DeleteCarRequestDto carDto){
+		carService.delete(carDto.getPlate());
+	}
+	
 }

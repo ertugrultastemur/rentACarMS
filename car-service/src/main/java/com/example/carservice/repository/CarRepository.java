@@ -7,5 +7,7 @@ import com.google.common.base.Optional;
 
 public interface CarRepository extends JpaRepository<Car, Integer>{
 
-	java.util.Optional<Car> findCarByState(String plate);
+	java.util.Optional<Car> findByPlate(String plate);
+	
+	void deleteByPlate(String plate);
 }

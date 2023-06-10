@@ -8,9 +8,6 @@
     <fullyQualifiedTypeName name="jakarta.persistence.Column"/>
     <fullyQualifiedTypeName name="com.example.carservice.repository.CarRepository"/>
     <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
-    <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
-    <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
-    <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
     <fullyQualifiedTypeName name="com.google.common.base.Optional"/>
     <fullyQualifiedTypeName name="java.util.stream.Collector"/>
     <fullyQualifiedTypeName name="java.util.stream.Collectors"/>
@@ -19,14 +16,12 @@
     <fullyQualifiedTypeName name="com.example.carservice.exception.CarNotFoundException"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RestController"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
-    <fullyQualifiedTypeName name="lombok.Data"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="com.example.carservice.service.CarService"/>
     <fullyQualifiedTypeName name="com.example.carservice.dto.CarIdDto"/>
     <fullyQualifiedTypeName name="org.springframework.validation.annotation.Validated"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
-    <fullyQualifiedTypeName name="jakarta.validation.constraints.NotNull"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ResponseStatus"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
@@ -35,4 +30,15 @@
     <fullyQualifiedTypeName name="org.springframework.http.RequestEntity"/>
     <fullyQualifiedTypeName name="com.example.carservice.model.Car"/>
     <fullyQualifiedTypeName name="com.example.carservice.dto.CarDto"/>
+    <fullyQualifiedTypeName name="jakarta.validation.constraints.NotNull"/>
+    <fullyQualifiedTypeName name="jakarta.validation.constraints.NotBlank"/>
+    <fullyQualifiedTypeName name="com.example.carservice.dto.request.CreateCarRequestDto"/>
+    <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
+    <fullyQualifiedTypeName name="com.example.carservice.util.ModelMapperService"/>
+    <fullyQualifiedTypeName name="org.springframework.context.annotation.Bean"/>
+    <fullyQualifiedTypeName name="org.modelmapper.ModelMapper"/>
+    <fullyQualifiedTypeName name="lombok.Data"/>
+    <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
+    <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
 </qualifiedTypeNameHistroy>
