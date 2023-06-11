@@ -12,11 +12,15 @@ import com.example.carservice.dto.CarDto;
 import com.example.carservice.dto.CarIdDto;
 import com.example.carservice.dto.request.CreateCarRequestDto;
 import com.example.carservice.dto.request.DeleteCarRequestDto;
+import com.example.carservice.dto.request.UpdateCarRequestDto;
+import com.example.carservice.dto.response.GetAllCarsResponse;
+import com.example.carservice.dto.response.GetByPlateCarDto;
 import com.example.carservice.exception.CarNotFoundException;
 import com.example.carservice.model.Car;
 import com.example.carservice.repository.CarRepository;
 import com.example.carservice.util.ModelMapperService;
 
+import ch.qos.logback.core.filter.Filter;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,23 +37,18 @@ public class CarService {
 		this.modelMapperService = modelMapperService;
 	}
 	
-	public List<CarDto> getAllCars(){
+	public List<GetAllCarsResponse> getAllCars(){
 		return repository.findAll()
 				.stream()
-				.map(carDto -> CarDto.convert(carDto))
+				.map(carDto -> GetAllCarsResponse.convert(carDto))
 				.collect(Collectors.toList())
 				;
 	}
 	
-	public CarIdDto findByPlate(String plate) {
+	public GetByPlateCarDto findByPlate(String plate) {
 		return repository.findByPlate(plate)
-				.map(car -> new CarIdDto(car.getId(),car.getState()))
+				.map(car -> new GetByPlateCarDto(car.getId(),car.getPlate(), car.getDailyPrice(),car.getModelYear(), car.getState()))
 				.orElseThrow(() -> new CarNotFoundException("Car could not found by plate : " + plate));
-	}
-	
-	public CarDto findCarById(int id) {
-		return repository.findById(id)
-				.map(carDto -> CarDto.convert(carDto)).orElseThrow(() -> new CarNotFoundException("Car could not found by id : " + id));
 	}
 	
 	public void add(CreateCarRequestDto carDto) {
@@ -58,12 +57,32 @@ public class CarService {
 	}
 	
 	@Transactional
-	public void delete(String carDto) {
-		repository.findByPlate(carDto)
+	public void delete(String plate) {
+		Car car = repository
+				.findByPlate(plate)
 	            .orElseThrow(() -> new CarNotFoundException("Entity not found"));
-		Car car = modelMapperService.forRequest().map(carDto, Car.class);
 		car.setDeleted(true);
-		repository.save(car);
+		this.repository.save(car);
 	}
+	
+	public void update(UpdateCarRequestDto carDto) {
+		Car car = modelMapperService.forRequest().map(carDto, Car.class);
+		repository
+				.findByPlate(carDto.getPlate())
+	            .orElseThrow(() -> new CarNotFoundException("Entity not found"));
+		
+	this.repository.save(car);
+		
+	}
+//	@Transactional
+//	public void deletes(DeleteCarRequestDto carDto) {
+//		repository.findAll()
+//		.stream()
+//		.filter(car -> car.getPlate().equals(carDto.getPlate())).map(car -> {
+//            car.setDeleted(true);
+//    		  repository.save(car);
+//            return car;
+//        });
+//	}
 
 }
