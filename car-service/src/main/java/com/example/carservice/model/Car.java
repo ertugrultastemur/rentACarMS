@@ -15,11 +15,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Table(name="Cars")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="Cars")
+@SQLDelete(sql = "UPDATE Cars SET is_deleted = true WHERE id=id")
+@Where(clause = "is_deleted=false")
+
 public class Car {
 	
 	@Id
@@ -43,8 +46,6 @@ public class Car {
 	private int modelId;
 	
 	@Column(name="isDeleted")
-	@SQLDelete(sql = "UPDATE Cars SET isDeleted = true WHERE id=?")
-	@Where(clause = "isDeleted=false")
 	private boolean isDeleted= Boolean.FALSE;
 
 }

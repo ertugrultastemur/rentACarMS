@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +21,9 @@ import com.example.carservice.dto.CarDto;
 import com.example.carservice.dto.CarIdDto;
 import com.example.carservice.dto.request.CreateCarRequestDto;
 import com.example.carservice.dto.request.DeleteCarRequestDto;
+import com.example.carservice.dto.request.UpdateCarRequestDto;
+import com.example.carservice.dto.response.GetAllCarsResponse;
+import com.example.carservice.dto.response.GetByPlateCarDto;
 import com.example.carservice.model.Car;
 import com.example.carservice.service.CarService;
 
@@ -34,19 +39,19 @@ public class CarController {
 
 	private final CarService carService;
 	
-	@GetMapping
-	public ResponseEntity<List<CarDto>> getAllCars(){
-		return ResponseEntity.ok(carService.getAllCars());
+	@GetMapping("/getAll")
+	public List<GetAllCarsResponse> getAllCars(){
+		return carService.getAllCars();
 	}
 	
-	@GetMapping("/state/{state}")
-	public ResponseEntity<CarIdDto> getCarByState(@PathVariable @NotNull String plate){
-		return ResponseEntity.ok(carService.findByPlate(plate));
+	@PutMapping
+	public void getCarByPlate(@RequestBody @Valid @NotNull UpdateCarRequestDto car){
+		carService.update(car);
 	}
 	
-	@GetMapping("/car/{id}")
-	public ResponseEntity<CarDto> getCarById(@PathVariable @NotNull int id){
-		return ResponseEntity.ok(carService.findCarById(id));
+	@GetMapping("/getByPlate/{plate}")
+	public GetByPlateCarDto getCarByPlate(@PathVariable @NotNull String plate){
+		return carService.findByPlate(plate);
 	}
 	
 	@PostMapping
