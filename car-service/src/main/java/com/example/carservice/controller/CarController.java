@@ -23,7 +23,7 @@ import com.example.carservice.dto.request.CreateCarRequestDto;
 import com.example.carservice.dto.request.DeleteCarRequestDto;
 import com.example.carservice.dto.request.UpdateCarRequestDto;
 import com.example.carservice.dto.response.GetAllCarsResponse;
-import com.example.carservice.dto.response.GetByPlateCarDto;
+import com.example.carservice.dto.response.GetCarByPlateDto;
 import com.example.carservice.model.Car;
 import com.example.carservice.service.CarService;
 
@@ -45,12 +45,12 @@ public class CarController {
 	}
 	
 	@PutMapping("/car/{car}")
-	public void getCarByPlate(@RequestBody @Valid @NotNull UpdateCarRequestDto car){
+	public void update(@RequestBody @Valid @NotNull UpdateCarRequestDto car){
 		carService.update(car);
 	}
 	
 	@GetMapping("/car/{plate}")
-	public GetByPlateCarDto getCarByPlate(@PathVariable @NotNull String plate){
+	public GetCarByPlateDto getCarByPlate(@PathVariable @NotNull String plate){
 		return carService.findByPlate(plate);
 	}
 	

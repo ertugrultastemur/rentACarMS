@@ -1,4 +1,4 @@
-package com.example.brandservice.dto.request;
+package com.example.brandservice.dto.response;
 
 import com.example.brandservice.model.Brand;
 
@@ -11,15 +11,19 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DeleteBrandRequestDto {
+public class GetBrandByIdDto {
 
-	@NotNull
 	@NotBlank
-	private int  id;
+	@NotNull
+	private int id;
 	
-	public static DeleteBrandRequestDto convert(Brand brand) {
-		return new DeleteBrandRequestDto(
-				brand.getId()
+	@NotNull
+	private String name;
+	
+	public static GetBrandByIdDto convert(Brand brand) {
+		return new GetBrandByIdDto(
+				brand.getId(),
+				brand.getName()
 				);
 		
 	}

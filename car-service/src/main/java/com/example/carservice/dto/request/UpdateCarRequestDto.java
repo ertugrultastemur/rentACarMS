@@ -32,13 +32,13 @@ public class UpdateCarRequestDto {
 	
 	
 	
-	public static CarDto convert(Car car) {
-		return new CarDto(
-				car.getModelId(),
+	public static UpdateCarRequestDto convert(Car car) {
+		return new UpdateCarRequestDto(
 				car.getPlate(),
 				car.getDailyPrice(),
 				car.getModelYear(),
-				car.getState()
+				car.getState(),
+				car.getModelId()
 				);
 		
 	}

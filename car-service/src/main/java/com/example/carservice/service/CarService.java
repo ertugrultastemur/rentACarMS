@@ -1,29 +1,20 @@
 package com.example.carservice.service;
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-import org.springframework.http.RequestEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
-import com.example.carservice.dto.CarDto;
-import com.example.carservice.dto.CarIdDto;
 import com.example.carservice.dto.request.CreateCarRequestDto;
-import com.example.carservice.dto.request.DeleteCarRequestDto;
 import com.example.carservice.dto.request.UpdateCarRequestDto;
 import com.example.carservice.dto.response.GetAllCarsResponse;
-import com.example.carservice.dto.response.GetByPlateCarDto;
+import com.example.carservice.dto.response.GetCarByPlateDto;
 import com.example.carservice.exception.CarNotFoundException;
 import com.example.carservice.model.Car;
 import com.example.carservice.repository.CarRepository;
 import com.example.carservice.util.ModelMapperService;
 
-import ch.qos.logback.core.filter.Filter;
 import jakarta.transaction.Transactional;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 
 @Service
 public class CarService {
@@ -40,14 +31,14 @@ public class CarService {
 	public List<GetAllCarsResponse> getAllCars(){
 		return repository.findAll()
 				.stream()
-				.map(carDto -> GetAllCarsResponse.convert(carDto))
+				.map(car -> this.modelMapperService.forResponse().map(car, GetAllCarsResponse.class) )
 				.collect(Collectors.toList())
 				;
 	}
 	
-	public GetByPlateCarDto findByPlate(String plate) {
+	public GetCarByPlateDto findByPlate(String plate) {
 		return repository.findByPlate(plate)
-				.map(car -> new GetByPlateCarDto(car.getId(),car.getPlate(), car.getDailyPrice(),car.getModelYear(), car.getState()))
+				.map(car -> new GetCarByPlateDto(car.getId(),car.getPlate(), car.getDailyPrice(),car.getModelYear(), car.getState()))
 				.orElseThrow(() -> new CarNotFoundException("Car could not found by plate : " + plate));
 	}
 	

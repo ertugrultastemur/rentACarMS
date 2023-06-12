@@ -30,13 +30,14 @@ public class CreateCarRequestDto {
 	@NotNull
 	private int modelId;
 	
-	public static CarDto convert(Car car) {
-		return new CarDto(
-				car.getModelId(),
+	public static CreateCarRequestDto convert(Car car) {
+		return new CreateCarRequestDto(
 				car.getPlate(),
 				car.getDailyPrice(),
-				car.getModelYear(),
-				car.getState()
+				car.getModelId(),
+				car.getState(),
+				car.getModelYear()
+				
 				);
 		
 	}
