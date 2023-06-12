@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetByPlateCarDto {
+public class GetCarByPlateDto {
 	
 	private int id;
 	
@@ -23,8 +23,8 @@ public class GetByPlateCarDto {
 
 	private int state;
 	
-	public GetByPlateCarDto convert(Car car) {
-		return new GetByPlateCarDto(
+	public GetCarByPlateDto convert(Car car) {
+		return new GetCarByPlateDto(
 				car.getId(),
 				car.getPlate(),
 				car.getDailyPrice(),

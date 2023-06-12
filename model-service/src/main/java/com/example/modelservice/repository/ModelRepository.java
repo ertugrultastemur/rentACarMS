@@ -1,5 +1,9 @@
 package com.example.modelservice.repository;
 
-public class ModelRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.modelservice.model.Model;
+
+public interface ModelRepository extends JpaRepository<Model, Integer>{
 
 }

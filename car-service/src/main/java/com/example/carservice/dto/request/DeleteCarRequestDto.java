@@ -23,13 +23,9 @@ public class DeleteCarRequestDto {
 	private String plate;
 	
 
-	public static CarDto convert(Car car) {
-		return new CarDto(
-				car.getModelId(),
-				car.getPlate(),
-				car.getDailyPrice(),
-				car.getModelYear(),
-				car.getState()
+	public static DeleteCarRequestDto convert(Car car) {
+		return new DeleteCarRequestDto(
+				car.getPlate()
 				);
 		
 	}
