@@ -68,9 +68,10 @@ public class CarService {
 	public void update(UpdateCarRequestDto carDto) {
 		Car car = modelMapperService.forRequest().map(carDto, Car.class);
 		repository
-				.findByPlate(carDto.getPlate())
-	            .orElseThrow(() -> new CarNotFoundException("Entity not found"));
-		
+				.findByPlate(carDto.getPlate()).map(carD -> {
+					car.setId(carD.getId());
+					return carD;
+				}).orElseThrow(() -> new CarNotFoundException("Car could not found by plate : " + car.getPlate()));
 	this.repository.save(car);
 		
 	}

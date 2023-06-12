@@ -39,17 +39,17 @@ public class CarController {
 
 	private final CarService carService;
 	
-	@GetMapping("/getAll")
+	@GetMapping("/car/getAll")
 	public List<GetAllCarsResponse> getAllCars(){
 		return carService.getAllCars();
 	}
 	
-	@PutMapping
+	@PutMapping("/car/{car}")
 	public void getCarByPlate(@RequestBody @Valid @NotNull UpdateCarRequestDto car){
 		carService.update(car);
 	}
 	
-	@GetMapping("/getByPlate/{plate}")
+	@GetMapping("/car/{plate}")
 	public GetByPlateCarDto getCarByPlate(@PathVariable @NotNull String plate){
 		return carService.findByPlate(plate);
 	}
@@ -60,7 +60,7 @@ public class CarController {
 		this.carService.add(carDto);
 	}
 	
-	@DeleteMapping("/delete/{plate}")
+	@DeleteMapping("/car/{plate}")
 	public void delete(@PathVariable("plate") String plate){
 		carService.delete(plate);
 	}

@@ -30,7 +30,6 @@ public class UpdateCarRequestDto {
 	@NotNull
 	private int modelId;
 	
-	private boolean isDeleted= Boolean.FALSE;
 	
 	
 	public static CarDto convert(Car car) {
