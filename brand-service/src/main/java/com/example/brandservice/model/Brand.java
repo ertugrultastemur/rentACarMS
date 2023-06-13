@@ -14,11 +14,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="brands")
+@Table(name="Brands")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@SQLDelete(sql = "UPDATE Cars SET is_deleted = true WHERE id=id")
+@SQLDelete(sql = "UPDATE Brands SET is_deleted = true WHERE id=id")
 @Where(clause = "is_deleted=false")
 public class Brand {
 
