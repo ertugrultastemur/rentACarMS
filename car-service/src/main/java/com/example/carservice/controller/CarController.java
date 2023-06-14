@@ -3,7 +3,6 @@ package com.example.carservice.controller;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,18 +12,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.carservice.dto.CarDto;
-import com.example.carservice.dto.CarIdDto;
 import com.example.carservice.dto.request.CreateCarRequestDto;
-import com.example.carservice.dto.request.DeleteCarRequestDto;
 import com.example.carservice.dto.request.UpdateCarRequestDto;
 import com.example.carservice.dto.response.GetAllCarsResponse;
+import com.example.carservice.dto.response.GetCarByIdDto;
 import com.example.carservice.dto.response.GetCarByPlateDto;
-import com.example.carservice.model.Car;
 import com.example.carservice.service.CarService;
 
 import jakarta.validation.Valid;
@@ -50,8 +45,13 @@ public class CarController {
 	}
 	
 	@GetMapping("/car/{plate}")
-	public GetCarByPlateDto getCarByPlate(@PathVariable @NotNull String plate){
-		return carService.findByPlate(plate);
+	public ResponseEntity<GetCarByPlateDto> getCarByPlate(@PathVariable @NotNull String plate){
+		return ResponseEntity.ok(carService.findByPlate(plate));
+	}
+	
+	@GetMapping("/car/{id}")
+	public ResponseEntity<GetCarByIdDto> getCarById(@PathVariable @NotNull int id){
+		return ResponseEntity.ok(carService.findById(id));
 	}
 	
 	@PostMapping

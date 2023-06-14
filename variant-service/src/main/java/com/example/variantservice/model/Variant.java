@@ -1,11 +1,13 @@
 package com.example.variantservice.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-
-
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -34,6 +36,9 @@ public class Variant {
 	
 	@Column(name="isDeleted")
 	private boolean isDeleted= Boolean.FALSE;
+	
+	@ElementCollection
+	private List<Integer> userCar = new ArrayList<>();
 	
 	
 }

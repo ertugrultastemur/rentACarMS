@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.example.carservice.dto.request.CreateCarRequestDto;
 import com.example.carservice.dto.request.UpdateCarRequestDto;
 import com.example.carservice.dto.response.GetAllCarsResponse;
+import com.example.carservice.dto.response.GetCarByIdDto;
 import com.example.carservice.dto.response.GetCarByPlateDto;
 import com.example.carservice.exception.CarNotFoundException;
 import com.example.carservice.model.Car;
@@ -34,6 +35,12 @@ public class CarService {
 				.map(car -> this.modelMapperService.forResponse().map(car, GetAllCarsResponse.class) )
 				.collect(Collectors.toList())
 				;
+	}
+	
+	public GetCarByIdDto findById(int id) {
+		return repository.findById(id)
+				.map(car -> new GetCarByIdDto(car.getId(),car.getPlate(), car.getDailyPrice(), car.getModelYear(), car.getState()))
+				.orElseThrow(() -> new CarNotFoundException("Car could not found by id : " + id));
 	}
 	
 	public GetCarByPlateDto findByPlate(String plate) {
