@@ -1,6 +1,6 @@
 package com.example.carservice.dto.request;
 
-import com.example.carservice.dto.CarDto;
+
 import com.example.carservice.model.Car;
 
 import jakarta.validation.constraints.NotBlank;

@@ -3,8 +3,11 @@ package com.example.variantservice.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 import org.springframework.stereotype.Service;
 
+import com.example.variantservice.client.CarServiceClient;
+import com.example.variantservice.dto.request.CreateCarRequestDto;
 import com.example.variantservice.dto.request.CreateVariantRequestDto;
 import com.example.variantservice.dto.request.UpdateVariantRequestDto;
 import com.example.variantservice.dto.response.GetAllVariantsResponseDto;
@@ -23,11 +26,36 @@ public class VariantService {
 	
 	private ModelMapperService modelMapperService;
 	
-	public VariantService(VariantRepository repository, ModelMapperService modelMapperService) {
+	private final CarServiceClient carServiceClient;
+	
+	public VariantService(VariantRepository repository, CarServiceClient carServiceClient ,ModelMapperService modelMapperService) {
 		this.repository = repository;
+		this.carServiceClient = carServiceClient;
 		this.modelMapperService = modelMapperService;
+
 	}
 	
+	public GetByIdVariantDto getAllCarsInVariantById(int id) {
+		Variant variant = repository.findById(id)
+				.orElseThrow(() -> new VariantNotFoundException("Variant could not found by id: " +id));
+		
+		GetByIdVariantDto getByIdVariantDto = new GetByIdVariantDto(variant.getId(),
+				variant.getUserCar()
+				.stream()
+				.map(car -> carServiceClient.getCarById(car).getBody()).collect(Collectors.toList()));
+		
+		return getByIdVariantDto;
+	}
+	
+	public void addCarToVariant(CreateCarRequestDto carDto) {
+		int carId = carServiceClient.getCarByPlate(carDto.getPlate()).getBody().getId();
+		
+		Variant variant = repository.findById(carDto.getId()).orElseThrow(()-> new VariantNotFoundException("Variant not found by id: " + carDto.getId()));
+		variant.getUserCar().add(carId);
+		repository.save(variant);
+	}
+	
+
 	public List<GetAllVariantsResponseDto> getAll(){
 		return repository
 				.findAll()

@@ -1,9 +1,9 @@
 package com.example.carservice.dto.response;
 
-import com.example.carservice.dto.CarIdDto;
+
 import com.example.carservice.model.Car;
 
-import jakarta.persistence.Column;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

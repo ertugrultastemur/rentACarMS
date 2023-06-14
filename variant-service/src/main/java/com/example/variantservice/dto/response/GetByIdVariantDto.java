@@ -1,10 +1,10 @@
 package com.example.variantservice.dto.response;
 
 
-import com.example.variantservice.model.Variant;
+import java.util.ArrayList;
+import java.util.List;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
+
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,14 +18,16 @@ public class GetByIdVariantDto {
 	@NotNull
 	private int id;
 	
-	@NotNull
-	@NotBlank
-	private String name;
+	private List<GetCarByIdDto> userCar = new ArrayList<>();
 	
-	public GetByIdVariantDto convert(Variant variant) {
-		return new GetByIdVariantDto(
-				variant.getId(),
-				variant.getName()
-				);
-	}
+	
+	
+
+
+
+
+
+
+
+
 }
