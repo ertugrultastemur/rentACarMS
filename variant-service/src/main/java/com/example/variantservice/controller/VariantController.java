@@ -3,7 +3,6 @@ package com.example.variantservice.controller;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,10 +20,8 @@ import com.example.variantservice.dto.request.CreateVariantRequestDto;
 import com.example.variantservice.dto.request.UpdateVariantRequestDto;
 import com.example.variantservice.dto.response.GetAllVariantsResponseDto;
 import com.example.variantservice.dto.response.GetByIdVariantDto;
-import com.example.variantservice.dto.response.GetCarByIdDto;
 import com.example.variantservice.service.VariantService;
 
-import feign.Response;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
