@@ -27,14 +27,11 @@ public class CreateCarRequestDto {
 	@NotNull
 	private int state;
 	
-	@NotNull
-	private int modelId;
 	
 	public static CreateCarRequestDto convert(Car car) {
 		return new CreateCarRequestDto(
 				car.getPlate(),
 				car.getDailyPrice(),
-				car.getModelId(),
 				car.getState(),
 				car.getModelYear()
 				

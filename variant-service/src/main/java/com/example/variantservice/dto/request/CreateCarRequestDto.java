@@ -19,15 +19,7 @@ public class CreateCarRequestDto {
 	@NotBlank
 	private String plate;
 	
-	@NotNull
-	private double DailyPrice;
-	
-	@NotNull
-	private int modelYear;
-	
-	@NotNull
-	private int state;
-	
+
 	
 //	public static CreateCarRequestDto convert(Car car) {
 //		return new CreateCarRequestDto(

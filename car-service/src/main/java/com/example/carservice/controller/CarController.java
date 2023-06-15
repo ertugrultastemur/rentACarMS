@@ -44,13 +44,13 @@ public class CarController {
 		carService.update(car);
 	}
 	
-	@GetMapping("/car/{plate}")
-	public ResponseEntity<GetCarByPlateDto> getCarByPlate(@PathVariable @NotNull String plate){
+	@GetMapping("/plate/{plate}")
+	public ResponseEntity<GetCarByPlateDto> getCarByPlate(@PathVariable String plate){
 		return ResponseEntity.ok(carService.findByPlate(plate));
 	}
 	
 	@GetMapping("/car/{id}")
-	public ResponseEntity<GetCarByIdDto> getCarById(@PathVariable @NotNull int id){
+	public ResponseEntity<GetCarByIdDto> getCarById(@PathVariable int id){
 		return ResponseEntity.ok(carService.findById(id));
 	}
 	
