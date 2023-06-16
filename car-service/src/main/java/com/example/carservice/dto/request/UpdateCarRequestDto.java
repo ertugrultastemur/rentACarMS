@@ -26,9 +26,7 @@ public class UpdateCarRequestDto {
 	
 	@NotNull
 	private int state;
-	
-	@NotNull
-	private int modelId;
+
 	
 	
 	
@@ -37,8 +35,7 @@ public class UpdateCarRequestDto {
 				car.getPlate(),
 				car.getDailyPrice(),
 				car.getModelYear(),
-				car.getState(),
-				car.getModelId()
+				car.getState()
 				);
 		
 	}

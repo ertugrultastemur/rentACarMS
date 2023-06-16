@@ -2,7 +2,6 @@ package com.example.variantservice.client;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.IOUtils;
@@ -22,7 +21,7 @@ public class RetreiveMessageErrorDecoder implements ErrorDecoder {
 	public Exception decode(String methodKey, Response response) {
 		ExceptionMessage exceptionMessage = null;
 		try(InputStream body = response.body().asInputStream()){
-			exceptionMessage = new ExceptionMessage((String) response.headers().get("date").toArray()[1],
+			exceptionMessage = new ExceptionMessage((String) response.headers().get("date").toArray()[0],
 					response.status(),
 					HttpStatus.resolve(response.status()).getReasonPhrase(),
 					IOUtils.toString(body,StandardCharsets.UTF_8),
@@ -40,7 +39,6 @@ public class RetreiveMessageErrorDecoder implements ErrorDecoder {
 			return errorDecoder.decode(methodKey, response);
 		}
 		
-		return null;
 	}
 
 }

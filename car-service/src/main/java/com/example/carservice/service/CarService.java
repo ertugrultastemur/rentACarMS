@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import com.example.carservice.dto.request.CreateCarRequestDto;
 import com.example.carservice.dto.request.UpdateCarRequestDto;
 import com.example.carservice.dto.response.GetAllCarsResponse;
-import com.example.carservice.dto.response.GetCarByIdDto;
-import com.example.carservice.dto.response.GetCarByPlateDto;
+import com.example.carservice.dto.response.GetCarDto;
+import com.example.carservice.dto.response.GetCarIdDto;
 import com.example.carservice.exception.CarNotFoundException;
 import com.example.carservice.model.Car;
 import com.example.carservice.repository.CarRepository;
@@ -37,15 +37,15 @@ public class CarService {
 				;
 	}
 	
-	public GetCarByIdDto findById(int id) {
+	public GetCarDto findById(int id) {
 		return repository.findById(id)
-				.map(car -> new GetCarByIdDto(car.getId(),car.getPlate(), car.getDailyPrice(), car.getModelYear(), car.getState()))
+				.map(car -> GetCarDto.convert(car))
 				.orElseThrow(() -> new CarNotFoundException("Car could not found by id : " + id));
 	}
 	
-	public GetCarByPlateDto findByPlate(String plate) {
+	public GetCarIdDto findByPlate(String plate) {
 		return repository.findByPlate(plate)
-				.map(car -> new GetCarByPlateDto(car.getId(),car.getPlate(), car.getDailyPrice(),car.getModelYear(), car.getState()))
+				.map(car -> new GetCarIdDto(car.getId(),car.getPlate()))
 				.orElseThrow(() -> new CarNotFoundException("Car could not found by plate : " + plate));
 	}
 	
