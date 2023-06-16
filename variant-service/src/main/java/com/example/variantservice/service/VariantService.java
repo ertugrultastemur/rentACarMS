@@ -48,7 +48,6 @@ public class VariantService {
 	
 	public void addCarToVariant(CreateCarRequestDto carDto) {
 		int carId = carServiceClient.getCarByPlate(carDto.getPlate()).getBody().getId();
-		
 		Variant variant = repository.findById(carDto.getId()).orElseThrow(()-> new VariantNotFoundException("Variant not found by id: " + carDto.getId()));
 		variant.getUserCar().add(carId);
 		repository.save(variant);

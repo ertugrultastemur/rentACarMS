@@ -18,7 +18,7 @@ public class GetByIdVariantDto {
 	@NotNull
 	private int id;
 	
-	private List<GetCarByIdDto> userCar = new ArrayList<>();
+	private List<GetCarDto> userCar = new ArrayList<>();
 	
 	
 	

@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.carservice.dto.request.CreateCarRequestDto;
 import com.example.carservice.dto.request.UpdateCarRequestDto;
 import com.example.carservice.dto.response.GetAllCarsResponse;
-import com.example.carservice.dto.response.GetCarByIdDto;
-import com.example.carservice.dto.response.GetCarByPlateDto;
+import com.example.carservice.dto.response.GetCarDto;
+import com.example.carservice.dto.response.GetCarIdDto;
 import com.example.carservice.service.CarService;
 
 import jakarta.validation.Valid;
@@ -45,12 +45,12 @@ public class CarController {
 	}
 	
 	@GetMapping("/plate/{plate}")
-	public ResponseEntity<GetCarByPlateDto> getCarByPlate(@PathVariable String plate){
+	public ResponseEntity<GetCarIdDto> getCarByPlate(@PathVariable String plate){
 		return ResponseEntity.ok(carService.findByPlate(plate));
 	}
 	
 	@GetMapping("/car/{id}")
-	public ResponseEntity<GetCarByIdDto> getCarById(@PathVariable int id){
+	public ResponseEntity<GetCarDto> getCarById(@PathVariable int id){
 		return ResponseEntity.ok(carService.findById(id));
 	}
 	
@@ -58,6 +58,7 @@ public class CarController {
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public void add(@RequestBody @Valid CreateCarRequestDto carDto) {
 		this.carService.add(carDto);
+
 	}
 	
 	@DeleteMapping("/car/{plate}")

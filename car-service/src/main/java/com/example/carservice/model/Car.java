@@ -41,9 +41,6 @@ public class Car {
 	@Column(name="state")
 	private int state; //1 available 2 rented 3 maintanced
 	
-	@Column(name="modelId")
-	private int modelId;
-	
 	@Column(name="isDeleted")
 	private boolean isDeleted= Boolean.FALSE;
 
