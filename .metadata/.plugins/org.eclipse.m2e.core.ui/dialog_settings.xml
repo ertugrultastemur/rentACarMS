@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\campspring\rentACarMS\gateway"/>
 			<item value="C:\campspring\rentACarMS\variant-service"/>
 			<item value="C:\campspring\rentACarMS\modelservice"/>
 			<item value="C:\campspring\rentACarMS\brand-service"/>

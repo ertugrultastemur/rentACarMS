@@ -20,7 +20,7 @@ public interface CarServiceClient {
 	
 		@GetMapping("/plate/{plate}")
 		@CircuitBreaker(name="getCarByPlateCircuitBreaker", fallbackMethod = "getCarByPlateFallBack")
-		public ResponseEntity<GetCarIdDto> getCarByPlate(@PathVariable String plate);
+		public ResponseEntity<GetCarIdDto> getCarByPlate(@PathVariable("plate") String plate);
 		
 		default ResponseEntity<GetCarIdDto> getCarFallBack(String plate, Exception exception){
 			logger.info("Car not found by plate" + plate + ", returning default GetCarIdDto object.");
@@ -30,7 +30,7 @@ public interface CarServiceClient {
 		
 		@GetMapping("/car/{id}")
 		@CircuitBreaker(name="getCarByIdCircuitBreaker", fallbackMethod = "getCarByIdFallBack")
-		public ResponseEntity<GetCarDto> getCarById(@PathVariable int id);
+		public ResponseEntity<GetCarDto> getCarById(@PathVariable("id") int id);
 		
 		default ResponseEntity<GetCarDto> getCarByIdFallBack(int id, Exception exception){
 			logger.info("Car not found by id" + id + ", returning default GetCarDto object.");

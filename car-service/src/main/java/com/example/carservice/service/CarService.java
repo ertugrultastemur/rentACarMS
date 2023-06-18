@@ -3,6 +3,8 @@ package com.example.carservice.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.example.carservice.dto.request.CreateCarRequestDto;
@@ -23,6 +25,7 @@ public class CarService {
 	private final CarRepository repository;
 	
 	private ModelMapperService modelMapperService;
+	
 	
 	public CarService(CarRepository repository,ModelMapperService modelMapperService) {
 		this.repository = repository;
