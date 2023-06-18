@@ -2,6 +2,8 @@ package com.example.carservice.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -34,6 +36,8 @@ public class CarController {
 
 	private final CarService carService;
 	
+	Logger logger = LoggerFactory.getLogger(CarController.class);
+	
 	@GetMapping("/car/getAll")
 	public List<GetAllCarsResponse> getAllCars(){
 		return carService.getAllCars();
@@ -46,6 +50,7 @@ public class CarController {
 	
 	@GetMapping("/plate/{plate}")
 	public ResponseEntity<GetCarIdDto> getCarByPlate(@PathVariable String plate){
+		logger.info("Car requested by plate: " +plate);
 		return ResponseEntity.ok(carService.findByPlate(plate));
 	}
 	

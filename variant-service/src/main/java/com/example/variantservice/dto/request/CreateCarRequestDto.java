@@ -21,15 +21,5 @@ public class CreateCarRequestDto {
 	
 
 	
-//	public static CreateCarRequestDto convert(Car car) {
-//		return new CreateCarRequestDto(
-//				car.getPlate(),
-//				car.getDailyPrice(),
-//				car.getModelId(),
-//				car.getState(),
-//				car.getModelYear()
-//				
-//				);
-//		
-//	}
+
 }

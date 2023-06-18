@@ -3,6 +3,8 @@ package com.example.variantservice.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.core.env.Environment;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.example.variantservice.client.CarServiceClient;
@@ -27,10 +29,15 @@ public class VariantService {
 	
 	private final CarServiceClient carServiceClient;
 	
-	public VariantService(VariantRepository repository, CarServiceClient carServiceClient ,ModelMapperService modelMapperService) {
+	private final Environment environment;
+	
+	private Logger logger;
+	
+	public VariantService(VariantRepository repository, CarServiceClient carServiceClient ,ModelMapperService modelMapperService, Environment environment) {
 		this.repository = repository;
 		this.carServiceClient = carServiceClient;
 		this.modelMapperService = modelMapperService;
+		this.environment = environment;
 
 	}
 	
@@ -67,6 +74,8 @@ public class VariantService {
 	}
 	
 	public void add(CreateVariantRequestDto variantDto) {
+		logger.info("Variant created on port number " + environment.getProperty("local.server.port"));
+		
 		Variant variant = this.modelMapperService.forRequest().map(variantDto, Variant.class);
 		repository.save(variant);
 	}
